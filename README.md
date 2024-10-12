@@ -9,7 +9,7 @@ This repository contains Cypress tests for the archify project.
 First, clone the repository using the link below:
 
 ```sh
-git clone https://github.com/mansyur007/qa_cypress_archify.git
+git@github.com:mansyur007/automation-cypress.git
 ```
 Make sure you are on the main branch.
 
