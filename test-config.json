@@ -1,0 +1,16 @@
+{
+  "login": "cypress run --spec 'cypress/e2e/1-login/'",
+  "main-page": "cypress run --spec 'cypress/e2e/2-main-page/'",
+  "messages": "cypress run --spec 'cypress/e2e/3-message/'",
+  "brands-search": "cypress run --spec 'cypress/e2e/4-brands-search/'",
+  "products-search": "cypress run --spec 'cypress/e2e/5-products-search/'",
+  "my-account": "cypress run --spec 'cypress/e2e/6-my-account/'",
+  "design-folder": "cypress run --spec 'cypress/e2e/7-design-folder/'",
+  "home-feed": "cypress run --spec 'cypress/e2e/8-home-feed/'",
+  "my-library": "cypress run --spec 'cypress/e2e/9-my-library/'",
+  "saved-companies": "cypress run --spec 'cypress/e2e/10-saved-companies/'",
+  "specsheet": "cypress run --spec 'cypress/e2e/11-specsheet/'",
+  "design-profesional": "cypress run --spec 'cypress/e2e/12-design-profesional/'",
+  "regression-core-features-afternoon": "cypress run --spec 'cypress/e2e/12-design-profesional/,cypress/e2e/11-specsheet/'",
+  "regression-core-features-morning": "cypress run --spec 'cypress/e2e/1-login/,cypress/e2e/2-main-page/,cypress/e2e/3-message/,cypress/e2e/4-brands-search/,cypress/e2e/5-products-search/,cypress/e2e/6-my-account/,cypress/e2e/7-design-folder/,cypress/e2e/8-home-feed/,cypress/e2e/9-my-library/,cypress/e2e/10-saved-companies/'"
+}

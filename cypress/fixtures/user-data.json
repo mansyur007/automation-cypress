@@ -1,0 +1,25 @@
+{
+    "user_data": {
+        "protocol": "https://",
+        "embedded_credential_environment": "https://archify:archify@",
+        "environment": "staging",
+        "environment_archify_spec": "archifySpec",
+        "user_archi_id": "staging2idarch@mailinator.com",
+        "password_archi_id": "123456",
+        "user_archi_au": "staging1auarch@mailinator.com",
+        "password_archi_au": "1",
+        "suppplier_archi": "laburox@grr.la",
+        "password_supplier": "archify",
+        "lang_australia": "Australia",
+        "user_archi_99": "staging99idarch@mailinator.com",
+        "user_archi_3": "staging3idarch@mailinator.com",
+        "password_archi_3": "123456",
+        "user_archi_1": "staging1idarch@mailinator.com",
+        "password_archi_1": "123456",
+        "user_archi_company": "staging4idarch@mailinator.com"
+    },
+    "brands_data": {
+        "category_accessibility": "Accessibility",
+        "sub_category_all_accessibility": "All Accessibility"
+    }
+}

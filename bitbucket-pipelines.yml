@@ -1,0 +1,128 @@
+image: cypress/browsers:node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1
+
+definitions:
+  caches:
+    node: ./node_modules  # Cache the node_modules folder
+    cypress: /root/.cache/Cypress  # Cache the Cypress binary
+    system-packages: /usr/bin
+
+  steps:
+    - step: &setup_configuration
+        name: Setup Cypress Configuration
+        caches:
+          - node
+          - cypress
+          - system-packages
+        script:
+          - |
+            if [ -f "cypress.config.js" ]; then
+              cp cypress.config.js cypress.config.backup.js
+            fi
+            if [ -f "cypress/support/e2e.js" ]; then
+              cp cypress/support/e2e.js cypress/support/e2e.backup.js
+            fi
+
+          # Install Dependencies
+          - npm ci
+          - npm run cy:verify
+
+          # Restore the config file
+          - |
+            if [ -f "cypress.config.backup.js" ]; then
+              mv cypress.config.backup.js cypress.config.js
+            fi
+            if [ -f "cypress/support/e2e.backup.js" ]; then
+              mv cypress/support/e2e.backup.js cypress/support/e2e.js
+            fi
+    - step: &setup_curl
+        name: Setup Curl
+        caches:
+          - system-packages
+        script:
+          # Update and install curl if not available
+          - |
+            if ! command -v curl &> /dev/null; then
+              apt-get update && apt-get install -y curl
+            fi
+
+pipelines:
+  custom:
+    e2e-login:
+      - step: *setup_configuration  # Call the setup configuration
+      - step: *setup_curl
+      - step:
+          name: Run E2E Login Tests
+          caches:
+            - node
+            - cypress
+            - system-packages
+          script:
+            - |
+              if ! command -v curl &> /dev/null; then
+                apt-get update && apt-get install -y curl
+              fi
+            - npm run cy:e2e login  > result_file.txt
+            - |
+              if grep -q '✖' result_file.txt; then
+                # Exit with error code to fail the build
+                exit 1
+              fi
+
+          after-script:
+            - bash send_test_result.sh
+          artifacts:
+            - cypress/screenshots/**
+            - cypress/videos/**
+            - cypress/results/**
+
+    archify-regression-core-features-morning:
+      - step: *setup_configuration  # Call the setup configuration
+      - step:
+          name: Run E2E Regression Tests
+          caches:
+            - node
+            - cypress
+            - system-packages
+          script:
+            - |
+              if ! command -v curl &> /dev/null; then
+                apt-get update && apt-get install -y curl
+              fi
+            - npm run cy:e2e regression-core-features-morning > result_file.txt  # Run the end-to-end login tests
+            - |
+              if grep -q '✖' result_file.txt; then
+                # Exit with error code to fail the build
+                exit 1
+              fi
+          after-script:
+            - bash send_test_result.sh
+          artifacts:
+            - cypress/screenshots/**
+            - cypress/videos/**
+            - cypress/results/**
+
+    archify-regression-core-features-afternoon:
+      - step: *setup_configuration  # Call the setup configuration
+      - step:
+          name: Run E2E Regression II Tests
+          caches:
+            - node
+            - cypress
+            - system-packages
+          script:
+            - |
+              if ! command -v curl &> /dev/null; then
+                apt-get update && apt-get install -y curl
+              fi
+            - npm run cy:e2e regression-core-features-afternoon > result_file.txt  # Run the end-to-end login tests
+            - |
+              if grep -q '✖' result_file.txt; then
+                # Exit with error code to fail the build
+                exit 1
+              fi
+          after-script:
+            - bash send_test_result.sh
+          artifacts:
+            - cypress/screenshots/**
+            - cypress/videos/**
+            - cypress/results/**
