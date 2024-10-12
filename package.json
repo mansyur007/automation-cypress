@@ -39,7 +39,7 @@
     "cy:open": "cypress open",
     "cy:e2e": "node run_script.js"
   },
-  "author": "Aziz, Mansyur",
+  "author": "Mansyur",
   "license": "",
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
