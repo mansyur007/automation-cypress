@@ -19,16 +19,6 @@ module.exports = defineConfig({
         resultsDir: "./cypress/allure-results",
       });
 
-      // Add custom task to find downloaded file
-      on('task', {
-        findDownloadedFile(fileExtension) {
-          const downloadsFolder = path.join(__dirname, 'cypress', 'downloads');
-          const files = fs.readdirSync(downloadsFolder);
-          // Find files that end with the given extension
-          return files.find((file) => file.endsWith(fileExtension)) || null;
-        }
-      });
-
       return config;
     },
     trashAssetsBeforeRuns: false,
@@ -38,6 +28,6 @@ module.exports = defineConfig({
     viewportWidth: 1600,
     video: true,
     videoCompression: false,
-    defaultCommandTimeout: 30000
+    defaultCommandTimeout: 5000
   },
 });
