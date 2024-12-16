@@ -1,6 +1,5 @@
 
-import { faker } from "@faker-js/faker";
-import { actionStorage } from "../../support/e2e";
+const { faker, actionStorage } = require("../../support/e2e");
 
 describe("Describe testing", function () {
   before(() => {
@@ -16,25 +15,25 @@ describe("Describe testing", function () {
     // value get before test
     console.log(actionStorage.find.element);
     cy.action({ attr: actionStorage.find.element, text: "fill name" }).type(
-      faker.location.zipCode()
+      faker.generateName()
     );
   });
 
   it("Fill email", function () {
     cy.action({ attr: selects.fillEmail, text: "fill email" }).type(
-      faker.internet.email()
+      faker.generateEmails()
     );
   });
 
   it("Fill CPF using cssSelector", () => {
     cy.action({ attr: selects.fillCpf, text: "Fill CPF" }).type(
-      faker.location.zipCode()
+      faker.generateCPF()
     );
   });
 
   it("Fill CEP using xpath", () => {
     cy.action({ attr: selects.fillCEP, text: "Fill CEP" }).type(
-      faker.location.zipCode()
+      faker.generateCEP()
     );
   });
 
